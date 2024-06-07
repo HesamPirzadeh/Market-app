@@ -6,23 +6,29 @@ import Loader from "../components/Loader";
 import { useProduct } from "../context/ProductContext";
 
 import styles from "../css/ProductPages.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function ProductsPage() {
-  const [input, setInput] = useState([]);
   const products = useProduct();
+  
+  const [display,setDisplay]= useState([])
+  const [input, setInput] = useState("");
+
+  useEffect(()=>{
+    setDisplay(products)
+  },[products])
 
 
-  const searchHanlder =()=>{
+  const searchHanlder = () => {
     console.log("search");
-  }
+  };
 
-  const CategoryHandler =(e)=>{
-    const {tagName} = e.target 
-    const list = e.target.innerText.toLowerCase()
-    
-    if (tagName !== "LI") return 
-  }
+  const CategoryHandler = (e) => {
+    const { tagName } = e.target;
+    const list = e.target.innerText.toLowerCase();
+
+    if (tagName !== "LI") return;
+  };
 
   return (
     <>
@@ -38,14 +44,16 @@ function ProductsPage() {
         </button>
       </div>
       <div className={styles.container}>
-        {!products.length && <Loader />}
+        {!display.length && <Loader />}
         <div className={styles.products}>
-          {products.map((p) => (
+          {display.map((p) => (
             <Card key={p.id} data={p} />
           ))}
         </div>
         <div>
-          <div><FaListUl/></div>
+          <div>
+            <FaListUl />
+          </div>
           <p>Categories</p>
         </div>
         <ul onClick={CategoryHandler}>
