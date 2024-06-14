@@ -7,6 +7,7 @@ import { useProduct } from "../context/ProductContext";
 
 import styles from "../css/ProductPages.module.css";
 import { useEffect, useState } from "react";
+import { searchProduct } from "../helpers/helpers";
 
 function ProductsPage() {
   const products = useProduct();
@@ -21,6 +22,8 @@ function ProductsPage() {
 
   useEffect(()=>{
     console.log(query)
+    let search = searchProduct(products,query.input)
+    setDisplay(search)
   },[query])
 
 
