@@ -7,7 +7,13 @@ const searchProduct = (products, search) => {
   const filterProduct = products.filter((p) =>
     p.title.toLowerCase().includes(search)
   );
-  return filterProduct
+  return filterProduct;
 };
 
-export { shortenText,searchProduct };
+const categoryProduct = (products, category) => {
+  if (!category) return products;
+  const filterProduct = products.filter((p) => p.category === category);
+  return filterProduct;
+};
+
+export { shortenText, searchProduct, categoryProduct };
