@@ -16,4 +16,19 @@ const categoryProduct = (products, category) => {
   return filterProduct;
 };
 
-export { shortenText, searchProduct, categoryProduct };
+
+const queryObject = (currentQuery,newQuery)=>{
+  if (newQuery.category === "all") {
+    const {category,...rest} = currentQuery
+    return rest
+  }
+  if (newQuery.input ==="") {
+    const{input,...rest}=currentQuery
+    return rest
+  }
+    return {...currentQuery,...newQuery}
+}
+
+
+
+export { shortenText, searchProduct, categoryProduct,queryObject };
