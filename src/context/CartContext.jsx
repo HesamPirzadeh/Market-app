@@ -1,16 +1,24 @@
-import { Children, createContext, useReducer } from "react"
+import { Children, createContext, useContext, useReducer } from "react"
 
 const initialState = {}
 
-const reducer=()=>{}
+const reducer=(state,action)=>{
+    console.log(state,action);
+}
 
-const context = createContext()
+const Context = createContext()
 
 function CartProvider({children}) {
-    const [state,disPatch]=useReducer(reducer,initialState)
+    const [state,dispatch]=useReducer(reducer,initialState)
   
-    return <context.Provider value={state}>{children}</context.Provider>
+    return <Context.Provider value={{state,dispatch}}>{children}</Context.Provider>
     
 }
 
+const useCart =()=>{
+    const{state,dispatch}= useContext(Context)
+    return[state,dispatch]
+}
+
 export default CartProvider
+export {useCart}
