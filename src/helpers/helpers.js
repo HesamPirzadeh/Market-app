@@ -16,19 +16,31 @@ const categoryProduct = (products, category) => {
   return filterProduct;
 };
 
-
-const queryObject = (currentQuery,newQuery)=>{
+const queryObject = (currentQuery, newQuery) => {
   if (newQuery.category === "all") {
-    const {category,...rest} = currentQuery
-    return rest
+    const { category, ...rest } = currentQuery;
+    return rest;
   }
-  if (newQuery.input ==="") {
-    const{input,...rest}=currentQuery
-    return rest
+  if (newQuery.input === "") {
+    const { input, ...rest } = currentQuery;
+    return rest;
   }
-    return {...currentQuery,...newQuery}
-}
+  return { ...currentQuery, ...newQuery };
+};
 
+const initialQuery = (searchParams) => {
+  const query = {};
+  const category = searchParams.get("category");
+  const input = searchParams.get("input");
+  if (category) query.category = category;
+  if (input) query.input = input;
+  return query;
+};
 
-
-export { shortenText, searchProduct, categoryProduct,queryObject };
+export {
+  shortenText,
+  searchProduct,
+  categoryProduct,
+  queryObject,
+  initialQuery,
+};
