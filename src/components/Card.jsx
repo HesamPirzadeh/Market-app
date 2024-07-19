@@ -14,12 +14,8 @@ function Card({ data }) {
   const [state,dispatch]=useCart()
 
   const buyHandler=()=>{
-    dispatch({type:"add",payload:data})
+    dispatch({type:"ADD_ITEM",payload:data})
   }
-
-  
-  
-
 
   return (
     <div className={styles.card}>
